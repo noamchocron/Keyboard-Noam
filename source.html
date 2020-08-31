@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background-color: #365E85;
+        }
+        .kbOnTop{
+            background-color: #0063B2FF;
+            border: 5px solid black;
+            color: darkslateblue;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            border-radius: 15px;
+        }
+
+        .textOnTop{
+            background-color: #9CC3D5FF;
+            border: 5px solid black;
+            color: darkslateblue;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            border-radius: 15px;
+        }
+        #text{
+            border: 5px solid black;
+            height: 200px;
+            position: relative;
+            top: 200px;
+            text-align: center;
+            border-radius: 15px;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+        #keyboard{
+            text-align: center;
+            position: relative;
+            top:100px;
+
+        }
+        makeText{
+            fontsize: 50px;
+        }
+    </style>
+
+</head>
+<button onclick="kbOnTop()" class="button kbOnTop">Keyboard On Top</button>
+<button onclick="textOnTop()" class="button textOnTop">Text On Top</button>
+
+<body>
+<div id = 'keyboard'>
+</div>
+
+<div id = 'text' >
+</div>
+</body>
+<script>
+    function textOnTop() {
+        document.getElementById("keyboard").style.top = "400px";
+        document.getElementById("text").style.top = "0px";
+    }
+    function kbOnTop() {
+        document.getElementById("keyboard").style.top = "100px";
+        document.getElementById("text").style.top = "150px";
+    }
+
+    var letters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a',
+        's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b',
+        'n', 'm', ',', '.', ';'];
+
+    function newButton(key){
+        var button = document.createElement("button");
+        button.addEventListener("click", makeText);
+        button.addEventListener("mousedown", lightOnClick);
+        button.addEventListener("mouseover", blueOnHover);
+        button.append(key);
+        button.style.width = "75px";
+        button.style.height = "50px";
+        document.getElementById('keyboard').append(button);
+        var array = document.getElementsByTagName("button");
+        console.log(array);
+    }
+    function createKeyboard(color){
+        var len = letters.length;
+        for(var i = 1; i < len + 1; i++){
+            newButton(letters[i-1], color);
+            if(0 == i % 10){
+                var rows = document.createElement("br");
+                document.getElementById('keyboard').append(rows);
+            }
+        }
+        newButton("Space");
+        newButton("Clear");
+    }
+
+    createKeyboard();
+
+    function makeText(){
+        if("Space" == this.innerHTML){
+            document.getElementById('text').append(" ");
+        }
+        if("Clear" == this.innerHTML){
+            document.getElementById('text').innerHTML ="";
+        }
+        if(this.innerHTML != "Space" && this.innerHTML != "Clear"){
+            document.getElementById('text').append(this.innerHTML);
+        }
+
+    }
+    function lightOnClick(){
+        this.style.backgroundColor = "mediumBlue";
+    }
+    function blueOnHover(){
+        this.style.backgroundColor = "Aquamarine";
+    }
+
+
+</script>
+</html>
